@@ -5,6 +5,10 @@ const app = angular.module('TodoApp', ["ngRoute"]);
 app.config(function($routeProvider){
     $routeProvider
     .when('/', {
+        templateUrl: 'partials/auth.html',
+        controller: 'AuthCtrl'
+    })
+    .when('/taskList', {
         templateUrl: 'partials/task-list.html',
         controller: 'TaskListCtrl'
     })
@@ -15,6 +19,10 @@ app.config(function($routeProvider){
     .when('/tasks/:taskId/edit', {
         templateUrl: 'partials/task-form.html',
         controller: 'EditTaskCtrl'
+    })
+    .when('/newTask', {
+        templateUrl: 'partials/task-form.html',
+        controller: 'AddTaskCtrl'
     })
     .otherwise('/');
 });

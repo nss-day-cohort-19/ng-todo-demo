@@ -1,6 +1,6 @@
 "use strict";
 
-app.controller('TaskListCtrl', function($scope, DataFactory) {
+app.controller('TaskListCtrl', function($scope, DataFactory, $location) {
   $scope.getTaskList = function () {
     DataFactory.getTaskList()
     .then((tasks)=>{
@@ -9,10 +9,15 @@ app.controller('TaskListCtrl', function($scope, DataFactory) {
     });
   };
 
-  $scope.removeTask = function () {
-    // remove a task
-    DataFactory.getTaskList();
+  $scope.removeTask = function(id){
+    DataFactory.removeTask(id)
+    .then(()=>{
+      $scope.getTaskList();
+    });
   };
 
   $scope.getTaskList();
+
 });
+
+

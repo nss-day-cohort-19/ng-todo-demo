@@ -2,12 +2,30 @@
 
 app.factory("DataFactory", function($q, $http, FBCreds) {
 
-  const addTask = () => {
-
+  const addTask = (newObj) => {
+    let newTask = JSON.stringify(newObj);
+      return $q((resolve,reject)=>{
+      $http.post(`${FBCreds.databaseURL}/items/.json`, newTask)
+      .then(function(itemObject){
+        resolve(itemObject.data);
+      })
+      .catch(function(error){
+        reject(error);
+      });
+    });
   };
 
-  const editTask = () => {
-
+  const editTask = (taskId, editedTask) => {
+    let newObj = JSON.stringify(editedTask);
+  return $q((resolve,reject)=>{
+      $http.patch(`${FBCreds.databaseURL}/items/${taskId}.json`, newObj)
+      .then(function(itemObject){
+        resolve(itemObject);
+      })
+      .catch(function(error){
+        reject(error);
+      });
+    });
   };
 
   const getTask = (taskId) => {
@@ -44,8 +62,16 @@ app.factory("DataFactory", function($q, $http, FBCreds) {
     });
   };
 
-  const removeTask = () => {
-
+  const removeTask = (taskId) => {
+    return $q((resolve, reject)=>{
+      $http.delete(`${FBCreds.databaseURL}/items/${taskId}.json`)
+      .then((response)=>{
+        resolve(response);
+      })
+      .catch((error)=>{
+        reject(error);
+      });
+    });
   };
 
   return {
