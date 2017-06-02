@@ -9,5 +9,5 @@
     <li class="list-group-item"><strong>Urgency:</strong>  {{task.urgency}}</li>
     <li class="list-group-item"><strong>Completed:</strong>  {{task.isCompleted ? yes : "no"}}</li>
   </ul>
-  <button class="btn btn-info"><a ng-href="#!/tasks/{{task.id}}/edit">Edit</a></button>
+  <a ng-href="#!/tasks/{{task.id}}/edit"><button class="btn btn-info">Edit</button></a>
 </div>
