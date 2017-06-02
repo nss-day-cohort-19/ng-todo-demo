@@ -2,7 +2,11 @@
 
 app.controller('TaskListCtrl', function($scope, DataFactory) {
   $scope.getTaskList = function () {
-    // get the task list
+    DataFactory.getTaskList()
+    .then((tasks)=>{
+        $scope.tasks = tasks;
+        console.log("tasks", $scope.tasks);
+    });
   };
 
   $scope.removeTask = function () {
@@ -10,4 +14,5 @@ app.controller('TaskListCtrl', function($scope, DataFactory) {
     DataFactory.getTaskList();
   };
 
+  $scope.getTaskList();
 });
