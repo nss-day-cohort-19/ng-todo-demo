@@ -9,12 +9,12 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
     password: ""
   };
 
-  let logout = () => {
+  $scope.logout = () => {
     console.log("logout clicked");
     AuthFactory.logoutUser()
       .then(function (data) {
         console.log("logged out?", data);
-        $window.location.url = "#!/login";
+        $location.path("/login");
       }, function (error) {
         console.log("error occured on logout");
       });
@@ -22,7 +22,7 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
 
   //when first loaded, make sure no one is logged in
   if (AuthFactory.isAuthenticated()) {
-    logout();
+    $scope.logout();
   }
 
   $scope.register = () => {
