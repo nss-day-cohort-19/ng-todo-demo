@@ -46,14 +46,18 @@ app.factory("DataFactory", function($q, $http, FBCreds) {
     return $q((resolve,reject)=>{
       $http.get(`${FBCreds.databaseURL}/items.json`)
       .then((itemObject)=>{
-        let itemCollection = itemObject.data;
-        console.log("itemCollection", itemCollection);
-        Object.keys(itemCollection).forEach((key)=>{
-          itemCollection[key].id = key;
-          tasks.push(itemCollection[key]);
-        });
-
-        resolve(tasks);
+        if(itemObject.data === null){
+          resolve(null);
+          console.log("ITS NULL BITCH");
+        }else{
+          let itemCollection = itemObject.data;
+          console.log("itemCollection", itemCollection);
+          Object.keys(itemCollection).forEach((key)=>{
+            itemCollection[key].id = key;
+            tasks.push(itemCollection[key]);
+          });
+          resolve(tasks);
+        }
       })
 
       .catch((error)=>{
