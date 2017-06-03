@@ -9,12 +9,12 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
     password: ""
   };
 
-  let logout = () => {
+   $scope.logout = () => {
     console.log("logout clicked");
     AuthFactory.logoutUser()
       .then(function (data) {
         console.log("logged out?", data);
-        $window.location.url = "#!/login";
+        $location.path("/");
       }, function (error) {
         console.log("error occured on logout");
       });
@@ -22,7 +22,7 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
 
   //when first loaded, make sure no one is logged in
   if (AuthFactory.isAuthenticated()) {
-    logout();
+    $scope.logout();
   }
 
   $scope.register = () => {
@@ -44,10 +44,10 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
     AuthFactory
       .loginUser($scope.account)
       .then(() => {
-        // $scope.isLoggedIn = true;
-        // console.log("UserCtrl: user is loggedIn", $scope.isLoggedIn );
-        // $scope.$apply();
-        $window.location.href = "#!/items/list";
+        $scope.isLoggedIn = true;
+        console.log("UserCtrl: user is loggedIn", $scope.isLoggedIn );
+        $scope.$apply();
+        $location.path("/isLoggedIn");
       });
   };
 
@@ -58,7 +58,7 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
         var user = result.user.uid;
         console.log("logged in user:", user);
         //Once logged in, go to another view
-        $location.path("/items/list");
+        $location.path("/taskList");
         $scope.$apply();
       }).catch(function (error) {
         // Handle the Errors.

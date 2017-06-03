@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller="NavCtrl">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
@@ -8,14 +8,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Brand*</a>
+      <p class="navbar-brand">To Do List</p>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-        <li><a href="#">Link</a></li>
-        <li><a href="#" title="the three of us do nothing at all :(">Link</a></li>
+        <li><a ng-href="#!/newTask">Add Task</a></li>
+        <li><a href="#!/taskList">Show All Tasks</a></li>
+        <li><a href="#" title="" ng-show="!isLoggedIn">login</a></li>
+        <li><a href="#" ng-controller="AuthCtrl" ng-click="logout()" ng-show="isLoggedIn">logout</a></li>
       </ul>
     </div>
+
   </div>
 </nav>
