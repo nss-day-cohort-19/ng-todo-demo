@@ -1,0 +1,31 @@
+{
+    "items": [
+    {
+      "task": "mow the lawn",
+      "isCompleted": false,
+      "dueDate": "12/5/17",
+      "assignedTo": "Greg",
+      "location": "Joe's house",
+      "urgency": "low",
+      "dependencies": "sunshine, clippers, hat, water, headphones"
+    },
+    {
+      "task": "review exercises",
+      "isCompleted": false,
+      "dueDate": "12/5/15",
+      "assignedTo": "Matt",
+      "location": "NSS",
+      "urgency": "high",
+      "dependencies": "wifi, tissues, vodka"
+    },
+    {
+      "task": "take a nap",
+      "isCompleted": false,
+      "dueDate": "6/21/17",
+      "assignedTo": "Hanna",
+      "location": "Porch of lakefront cabin",
+      "urgency": "medium",
+      "dependencies": "hammock, silence"
+    }
+  ]
+}
