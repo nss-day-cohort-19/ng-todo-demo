@@ -4,7 +4,13 @@ app.controller('TaskListCtrl', function($scope, DataFactory, $location) {
   $scope.getTaskList = function () {
     DataFactory.getTaskList()
     .then((tasks)=>{
-        $scope.tasks = tasks;
+        if(tasks === null){
+          $scope.tasks = [{
+            isEmpty: true
+          }];
+        }else{
+          $scope.tasks = tasks;
+        }
         console.log("tasks", $scope.tasks);
     });
   };
