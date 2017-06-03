@@ -8,10 +8,11 @@ app.controller('AddTaskCtrl', function($scope, DataFactory, $location) {
     dueDate: "",
     urgency: "",
     assignedTo: "",
-    location: ""
+    location: "",
+    isCompleted : false
   };
 
-  $scope.isCompleted = false;
+
 
   $scope.submitTask = function(){
     DataFactory.addTask($scope.Task)

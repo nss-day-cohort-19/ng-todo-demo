@@ -2,6 +2,23 @@
 
 const app = angular.module('TodoApp', ["ngRoute"]);
 
+//used to authenticate user when navigating to other views
+let isAuth = (AuthFactory) => new Promise ( (resolve, reject) => {
+  // console.log("running isAuth");
+    AuthFactory.isAuthenticated()
+    .then ( (userExists) => {
+    console.log("userExists", userExists);
+        if (userExists){
+      console.log("Authenticated, go ahead.");
+            resolve();
+        }else {
+      console.log("Authentication rejected, go away.");
+            reject();
+        }
+    });
+});
+
+
 app.config(function($routeProvider){
     $routeProvider
     .when('/', {
@@ -10,19 +27,23 @@ app.config(function($routeProvider){
     })
     .when('/taskList', {
         templateUrl: 'partials/task-list.html',
-        controller: 'TaskListCtrl'
+        controller: 'TaskListCtrl',
+        resolve: {isAuth}
     })
     .when('/tasks/:taskId', {
         templateUrl: 'partials/task-detail.html',
-        controller: 'TaskDetailCtrl'
+        controller: 'TaskDetailCtrl',
+        resolve: {isAuth}
     })
     .when('/tasks/:taskId/edit', {
         templateUrl: 'partials/task-form.html',
-        controller: 'EditTaskCtrl'
+        controller: 'EditTaskCtrl',
+        resolve: {isAuth}
     })
     .when('/newTask', {
         templateUrl: 'partials/task-form.html',
-        controller: 'AddTaskCtrl'
+        controller: 'AddTaskCtrl',
+        resolve: {isAuth}
     })
     .otherwise('/');
 });

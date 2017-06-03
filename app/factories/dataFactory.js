@@ -74,12 +74,14 @@ app.factory("DataFactory", function($q, $http, FBCreds) {
     });
   };
 
+
+
   return {
     addTask,
     getTask,
     editTask,
     getTaskList,
-    removeTask
+    removeTask,
   };
 
 });
