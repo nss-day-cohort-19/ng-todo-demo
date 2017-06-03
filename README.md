@@ -12,4 +12,5 @@ This is a simple To Do list app that utalizes AngularJS and Firebase to keep tra
 6. startup local server
     1. If you dont have a server on your machine you can run `npm install http-server -g` from any directory then run `hs` in the root directory to start up a local server. 
     2. You can then type `http://127.0.0.1:8080` into your browser navigate to the server you just started. 
-
+7. Login via gmail account or signup and register with email address/password
+8. Get Organized!
