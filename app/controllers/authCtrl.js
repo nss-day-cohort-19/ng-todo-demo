@@ -8,13 +8,14 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
     email: "",
     password: ""
   };
-
-  $scope.logout = () => {
+//change below with $window.location also, remove scocpe from logout
+// logout has no scope applied since it is only called internally
+  let logout = () => {
     console.log("logout clicked");
     AuthFactory.logoutUser()
       .then(function (data) {
         console.log("logged out?", data);
-        $location.path("/login");
+        $window.location.url = "#!/";
       }, function (error) {
         console.log("error occured on logout");
       });
@@ -22,7 +23,7 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
 
   //when first loaded, make sure no one is logged in
   if (AuthFactory.isAuthenticated()) {
-    $scope.logout();
+    logout();
   }
 
   $scope.register = () => {
@@ -47,7 +48,7 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
         // $scope.isLoggedIn = true;
         // console.log("UserCtrl: user is loggedIn", $scope.isLoggedIn );
         // $scope.$apply();
-        $window.location.href = "#!/items/list";
+        $window.location.href = "#!/task-list";
       });
   };
 
@@ -58,7 +59,7 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
         var user = result.user.uid;
         console.log("logged in user:", user);
         //Once logged in, go to another view
-        $location.path("/items/list");
+        $location.path("/task-list");
         $scope.$apply();
       }).catch(function (error) {
         // Handle the Errors.

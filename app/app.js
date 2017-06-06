@@ -2,27 +2,52 @@
 
 const app = angular.module('TodoApp', ["ngRoute"]);
 
+let isAuth = (AuthFactory) => new Promise ( (resolve, reject) => {
+	AuthFactory.isAuthenticated()
+	.then( (userExists) => {
+		if(userExists){
+			console.log("Authenticated, go ahead");
+			resolve();
+		}else {
+			console.log("Authentication reject, GO AWAY");
+			reject();
+		}
+	});
+});
+
 app.config( ($routeProvider) => {
 	$routeProvider
 	.when('/', {
-		templateUrl: 'partials/task-list.html',
-		controller: 'TaskListCtrl'
-	})
-	.when('/tasks/newtask', {
-		templateUrl: 'partials/task-form.html',
-		controller: 'AddTaskCtrl'
-	})
-	.when('/tasks/:taskId', {
-		templateUrl: 'partials/task-detail.html',
-		controller: 'TaskDetailCtrl'
-	})
-	.when('/tasks/:taskId/edit', {
-		templateUrl: 'partials/task-form.html',
-		controller: 'EditTaskCtrl'
+		templateUrl: 'partials/auth.html',
+		controller: 'AuthCtrl'
 	})
 	.when('/login', {
 		templateUrl: 'partials/auth.html',
 		controller: 'AuthCtrl'
+	})
+	.when('/logout', {
+		templateUrl: 'partials/auth.html',
+		controller: 'AuthCtrl'
+	})
+	.when('/task-list', {
+		templateUrl: 'partials/task-list.html',
+		controller: 'TaskListCtrl',
+		resolve: {isAuth}
+	})
+	.when('/tasks/newtask', {
+		templateUrl: 'partials/task-form.html',
+		controller: 'AddTaskCtrl',
+		resolve: {isAuth}
+	})
+	.when('/tasks/:taskId', {
+		templateUrl: 'partials/task-detail.html',
+		controller: 'TaskDetailCtrl',
+		resolve: {isAuth}
+	})
+	.when('/tasks/:taskId/edit', {
+		templateUrl: 'partials/task-form.html',
+		controller: 'EditTaskCtrl',
+		resolve: {isAuth}
 	})
 	.otherwise('/');
 });

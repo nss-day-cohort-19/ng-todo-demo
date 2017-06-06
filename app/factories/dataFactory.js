@@ -40,10 +40,11 @@ app.factory("DataFactory", function($q, $http, FBCreds) {
     });
   };
 
-  const getTaskList = () => {
+  const getTaskList = (user) => {
     let tasks = [];
+    console.log("myURL", `${FBCreds.databaseURL}/items.json?orderBy="uid"&equalTo="${user}"`);
     return $q( (resolve, reject) => {
-      $http.get(`${FBCreds.databaseURL}/items.json`)
+      $http.get(`${FBCreds.databaseURL}/items.json?orderBy="uid"&equalTo="${user}"`)
       .then( (itemObj) => {
         let itemCollection = itemObj.data;
         console.log("itemCollection", itemCollection);
