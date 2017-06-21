@@ -1,8 +1,10 @@
 "use strict";
 
-app.controller('TaskListCtrl', function($scope, DataFactory, $location, AuthFactory, SearchTermData) {
+app.controller('TaskListCtrl', function($scope, DataFactory, $location, AuthFactory, SearchTermData, $rootScope) {
 
   $scope.searchText = SearchTermData;
+  $rootScope.showSearch = true;
+
   let user = AuthFactory.getUser();
 
   $scope.getTaskList = function () {

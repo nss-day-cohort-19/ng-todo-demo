@@ -1,8 +1,9 @@
 "use strict";
 
-app.controller('AddTaskCtrl', function($scope, DataFactory, $location, AuthFactory) {
+app.controller('AddTaskCtrl', function($scope, DataFactory, $location, AuthFactory, $rootScope) {
 
   let user = AuthFactory.getUser();
+  $rootScope.showSearch = false;
 
   $scope.task = {
   	assignedTo: "",

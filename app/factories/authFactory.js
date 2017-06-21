@@ -2,8 +2,7 @@
 
 app.factory("AuthFactory", function(){
 
-    //currentUser, createUser, loginUser, logoutUser, isAuthenticated getUser
-
+    console.log("AuthFactory is in the house");
     let currentUser = null;
 
     let createUser = function(userObj){

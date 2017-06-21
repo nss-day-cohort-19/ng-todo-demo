@@ -3,28 +3,35 @@
 //login, logout, register, loginGoogle, clever conditional, authfactory
 app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
 
-  console.log("AuthCtrl is loaded");
+  console.log("Yo, AuthCtrl is loaded");
+
   $scope.account = {
     email: "",
     password: ""
   };
+
 //change below with $window.location also, remove scocpe from logout
-// logout has no scope applied since it is only called internally
   let logout = () => {
     console.log("logout clicked");
     AuthFactory.logoutUser()
-      .then(function (data) {
-        console.log("logged out?", data);
-        $window.location.url = "#!/";
+      .then(function () {
+        console.log("logged out DONE");
+        //no need to redirect since isAuth verifies login and will take care of re-direction
+        // $location.href = "#!/";
       }, function (error) {
         console.log("error occured on logout");
       });
   };
 
   //when first loaded, make sure no one is logged in
-  if (AuthFactory.isAuthenticated()) {
-    logout();
-  }
+  // // console.log("what is this?", AuthFactory.isAuthenticated());
+  // if (AuthFactory.isAuthenticated()) 
+  //   logout();
+  
+// console.log("app isAuth", isAuth());
+//   if (isAuth()){
+//     console.log("app isAuth", isAuth());
+//   }
 
   $scope.register = () => {
     console.log("you clicked register");
@@ -45,9 +52,11 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
     AuthFactory
       .loginUser($scope.account)
       .then(() => {
-        // $scope.isLoggedIn = true;
-        // console.log("UserCtrl: user is loggedIn", $scope.isLoggedIn );
+        //Option One
+        // $location.path("/task-list");
+        //need to update the view
         // $scope.$apply();
+        //Option TWO
         $window.location.href = "#!/task-list";
       });
   };
@@ -59,7 +68,8 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
         var user = result.user.uid;
         console.log("logged in user:", user);
         //Once logged in, go to another view
-        $location.path("/task-list");
+        //google takes care of refresh view
+        $location.path("/task-list"); //path does not get a #!
         $scope.$apply();
       }).catch(function (error) {
         // Handle the Errors.

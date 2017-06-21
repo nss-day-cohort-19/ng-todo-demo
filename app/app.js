@@ -2,7 +2,11 @@
 
 const app = angular.module('TodoApp', ["ngRoute"]);
 
+// let showSearch = false;
+
+// console.log("AuthFactory is", AuthFactory);
 let isAuth = (AuthFactory) => new Promise ( (resolve, reject) => {
+	console.log("AuthFactory is", AuthFactory);
 	AuthFactory.isAuthenticated()
 	.then( (userExists) => {
 		if(userExists){
@@ -15,29 +19,28 @@ let isAuth = (AuthFactory) => new Promise ( (resolve, reject) => {
 	});
 });
 
+
 app.config( ($routeProvider) => {
 	$routeProvider
 	.when('/', {
-		templateUrl: 'partials/auth.html',
-		controller: 'AuthCtrl'
+		templateUrl: 'partials/task-list.html',
+		controller: 'TaskListCtrl',
+		resolve: {isAuth}
 	})
 	.when('/login', {
-		templateUrl: 'partials/auth.html',
-		controller: 'AuthCtrl'
-	})
-	.when('/logout', {
 		templateUrl: 'partials/auth.html',
 		controller: 'AuthCtrl'
 	})
 	.when('/task-list', {
 		templateUrl: 'partials/task-list.html',
 		controller: 'TaskListCtrl',
+		showSearch: true,
 		resolve: {isAuth}
 	})
 	.when('/tasks/newtask', {
 		templateUrl: 'partials/task-form.html',
 		controller: 'AddTaskCtrl',
-		resolve: {isAuth}
+		resolve: {isAuth}	
 	})
 	.when('/tasks/:taskId', {
 		templateUrl: 'partials/task-detail.html',
@@ -50,6 +53,8 @@ app.config( ($routeProvider) => {
 		resolve: {isAuth}
 	})
 	.otherwise('/');
+
+	// $locationProvider.html5Mode(true);
 });
 
 app.run(($location, FBCreds) => {
@@ -61,4 +66,8 @@ app.run(($location, FBCreds) => {
 	};
 
 	firebase.initializeApp(authConfig);
+});
+
+app.run(function($rootScope) {
+  $rootScope.showSearch = false;
 });

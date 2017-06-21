@@ -1,11 +1,18 @@
 "use strict";
 
-app.controller('NavCtrl', function ($scope, AuthFactory, $window, SearchTermData) {
+app.controller('NavCtrl', function ($scope, AuthFactory, $window, SearchTermData, $rootScope) {
   
   // Log Button Function
 
   $scope.isLoggedIn = false;
   $scope.searchText = SearchTermData;
+
+ 
+console.log("showSearch", $scope.showSearch);
+
+  $scope.logout = () => {
+    AuthFactory.logoutUser();
+  };
 
   firebase.auth().onAuthStateChanged(function (user) {
     if (user) {

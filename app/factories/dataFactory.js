@@ -2,17 +2,29 @@
 
 app.factory("DataFactory", function($q, $http, FBCreds) {
 
+  // const addTask = ( newObj ) => {
+  //   return $q( (resolve, reject) => {
+  //     let object = JSON.stringify(newObj);
+  //     $http.post(`${FBCreds.databaseURL}/items.json`, object)
+  //     .then ( (itemID) => {
+  //       resolve(itemID);
+  //     })
+  //     .catch( (error) => {
+  //       reject(error);
+  //     });
+  //   });
+  // };
+
   const addTask = ( newObj ) => {
-    return $q( (resolve, reject) => {
       let object = JSON.stringify(newObj);
-      $http.post(`${FBCreds.databaseURL}/items.json`, object)
+      return $http.post(`${FBCreds.databaseURL}/items.json`, object)
       .then ( (itemID) => {
-        resolve(itemID);
-      })
-      .catch( (error) => {
-        reject(error);
+        return itemID;
+      }, (error) => {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        console.log("error", errorCode, errorMessage);
       });
-    });
   };
 
   const editTask = ( taskID, editedObj ) => {
