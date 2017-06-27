@@ -1,26 +1,24 @@
-<nav ng-controller="NavCtrl" class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-controller="NavCtrl">
   <div class="container-fluid">
-  
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-        aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Greatest TODO Ever</a>
+      <a class="navbar-brand" href="#">Great TODO</a>
     </div>
 
-    <div class="input-group col-xs-6 col-xs-offset-3" ng-show="isLoggedIn">
+    <div class="navbar-form navbar-left input-group" ng-show="isLoggedIn">
+        <div class="input-group" ng-show="showSearch">
+          <span class="input-group-addon glyphicon glyphicon-search" id="basic-addon1"></span>
+          <input type="text" class="form-control" placeholder="Search" ng-model="searchText.search">
+        </div>
+    </div>
 
-      <div ng-show="showSearch">
-        <span class="input-group-addon" id="basic-addon1">
-          <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-        </span><input type="text" class="form-control" placeholder="Search"  aria-describedby="basic-addon1" ng-model="searchText.search">
-      </div>
-  </div>
-
+    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a ng-show="isLoggedIn" ng-href="#!/task-list">Show All</a></li>
@@ -28,7 +26,8 @@
         <li><a ng-show="!isLoggedIn">Login</a></li>
         <li><a  ng-show="isLoggedIn" ng-click="logout()" >Logout</a></li>
       </ul>
-    </div>
+    </div><!-- /.navbar-collapse -->
 
-  </div> <!-- end of container -->
+  </div><!-- /.container-fluid -->
+  
 </nav>

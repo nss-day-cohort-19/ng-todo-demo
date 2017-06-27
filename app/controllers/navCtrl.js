@@ -8,7 +8,7 @@ app.controller('NavCtrl', function ($scope, AuthFactory, $window, SearchTermData
   $scope.searchText = SearchTermData;
 
  
-console.log("showSearch", $scope.showSearch);
+// console.log("showSearch", $scope.showSearch);
 
   $scope.logout = () => {
     AuthFactory.logoutUser();
