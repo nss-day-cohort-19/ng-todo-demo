@@ -41,11 +41,12 @@ app.factory("DataFactory", function($q, $http, FBCreds) {
   };
 
 
-  const getTaskList = () => {
+  const getTaskList = (user) => {
     let tasks = [];
     return $q((resolve,reject)=>{
       $http.get(`${FBCreds.databaseURL}/items.json`)
       .then((itemObject)=>{
+        console.log("itemObject",itemObject.data.uid);
         if(itemObject.data === null){
           resolve(null);
           console.log("ITS NULL BITCH");

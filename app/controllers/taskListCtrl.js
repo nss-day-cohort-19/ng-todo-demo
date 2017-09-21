@@ -1,8 +1,15 @@
 "use strict";
 
-app.controller('TaskListCtrl', function($scope, DataFactory, $location) {
+app.controller('TaskListCtrl', function($scope, DataFactory, $location, AuthFactory, SearchTermData) {
+
+  $scope.searchText = SearchTermData;
+  console.log("searchText", $scope.searchText);
+
+
+  let user = AuthFactory.getUser();
+
   $scope.getTaskList = function () {
-    DataFactory.getTaskList()
+    DataFactory.getTaskList(user)
     .then((tasks)=>{
         if(tasks === null){
           $scope.tasks = [{

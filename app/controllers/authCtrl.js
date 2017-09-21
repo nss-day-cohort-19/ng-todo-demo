@@ -41,13 +41,12 @@ app.controller("AuthCtrl", function ($scope, $window, AuthFactory, $location) {
 
   $scope.login = () => {
     console.log("you clicked login");
-    AuthFactory
-      .loginUser($scope.account)
+    AuthFactory.loginUser($scope.account)
       .then(() => {
         $scope.isLoggedIn = true;
-        console.log("UserCtrl: user is loggedIn", $scope.isLoggedIn );
         $scope.$apply();
-        $location.path("/isLoggedIn");
+        console.log("UserCtrl: user is loggedIn", $scope.isLoggedIn );
+        $location.path("/taskList");
       });
   };
 

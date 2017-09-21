@@ -10,6 +10,12 @@
       </button>
       <p class="navbar-brand">To Do List</p>
     </div>
+
+    <div class="input-group col-xs-6 col-xs-offset-3" ng-show="isLoggedIn">
+      <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+      <input type="text" ng-model="searchText.search" class="form-control" placeholder="Search" aria-describedby="basic-addon1">
+    </div>
+
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li><a ng-href="#!/newTask">Add Task</a></li>

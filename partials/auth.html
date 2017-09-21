@@ -7,10 +7,10 @@
     <section class="auth-form">
       <h4>Login/Register with Email</h4>
       <div>
-        Email: <input type="text" autofocus="true">
+        Email: <input ng-model="account.email" type="text" autofocus="true">
       </div>
       <div>
-        Password: <input type="password">
+        Password: <input ng-model="account.password" type="password">
       </div>
       <div>
         <button ng-click="login()" class="btn btn-info">Login</button>

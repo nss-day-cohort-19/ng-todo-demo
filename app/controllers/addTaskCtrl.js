@@ -1,6 +1,9 @@
 "use strict";
 
-app.controller('AddTaskCtrl', function($scope, DataFactory, $location) {
+app.controller('AddTaskCtrl', function($scope, DataFactory, $location, AuthFactory) {
+
+  let user = AuthFactory.getUser();
+
 
   $scope.Task = {
     task: "",
@@ -9,7 +12,8 @@ app.controller('AddTaskCtrl', function($scope, DataFactory, $location) {
     urgency: "",
     assignedTo: "",
     location: "",
-    isCompleted : false
+    isCompleted : false,
+    uid: user
   };
 
 
